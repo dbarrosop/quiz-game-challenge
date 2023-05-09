@@ -27,6 +27,10 @@ const client = new NhostClient({
 });
 
 export default async function handler(req: Request, res: Response) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: { message: "Method not allowed" } });
+  }
+
   const { body } = req;
 
   if (!body) {
