@@ -1,19 +1,3 @@
-CREATE TABLE public.questions (
-  id uuid DEFAULT gen_random_uuid() NOT NULL,
-  question text NOT NULL,
-  points int4 DEFAULT 1 NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE public.answers (
-  id uuid DEFAULT gen_random_uuid() NOT NULL,
-  answer text NOT NULL,
-  is_correct bool DEFAULT 'false' NOT NULL,
-  question_id uuid NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (question_id) REFERENCES public.questions (id) ON UPDATE RESTRICT ON DELETE RESTRICT
-);
-
 INSERT INTO public.questions (id, question) VALUES ('a6d7a14c-58f0-4f33-9bf9-92580b6e1aa3', 'How many planets are in our solar system?');
 INSERT INTO public.answers (answer, is_correct, question_id) VALUES ('6', 'false', 'a6d7a14c-58f0-4f33-9bf9-92580b6e1aa3');
 INSERT INTO public.answers (answer, is_correct, question_id) VALUES ('7', 'false', 'a6d7a14c-58f0-4f33-9bf9-92580b6e1aa3');
