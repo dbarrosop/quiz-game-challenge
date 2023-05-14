@@ -27,7 +27,14 @@ const client = new NhostClient({
 });
 
 export default async function handler(req: Request, res: Response) {
-  if (req.method !== "POST") {
+  if (req.method === "OPTIONS") {
+      // CORS preflight
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', '*');
+      res.setHeader('Access-Control-Allow-Headers', '*');
+      res.setHeader('Access-Control-Max-Age', '86400');
+      return res.status(200).end();
+  } else if (req.method !== "POST") {
     return res.status(405).json({ error: { message: "Method not allowed" } });
   }
 
